@@ -95,8 +95,8 @@ FROM inventory
 WHERE film_id
 IN
   (SELECT film_id
-    FROM film
-    WHERE title = 'Hunchback Impossible'
+   FROM film
+   WHERE title = 'Hunchback Impossible'
   );
 
 
@@ -157,3 +157,25 @@ IN
 					    FROM category
 					    WHERE name = "Family"));
                         
+-- 7e
+SELECT title, COUNT(title)
+FROM rental
+JOIN inventory
+ON rental.inventory_id = inventory.inventory_id
+JOIN film
+ON film.film_id = inventory.film_id
+GROUP BY title
+ORDER BY COUNT(title) DESC;
+
+-- 7f
+SELECT staff_id AS "Store", SUM(amount)
+FROM payment
+GROUP BY staff_id;
+
+-- 7g
+SELECT store_id, address, city
+FROM store
+JOIN address
+ON store.address_id = address.address_id
+JOIN city
+ON address.city_id = city.city_id;
