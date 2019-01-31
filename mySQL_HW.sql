@@ -129,9 +129,9 @@ SELECT staff.staff_id, SUM(august_payment.amount)
   FROM staff
        INNER JOIN (SELECT * 
                      FROM payment 
-		    WHERE payment_date 
+                    WHERE payment_date 
                      LIKE "2005-08%") AS august_payment
-	  ON staff.staff_id = august_payment.staff_id
+       ON staff.staff_id = august_payment.staff_id
  GROUP BY staff.staff_id;
 
 -- 6c
@@ -181,7 +181,7 @@ SELECT title
    AND language_id IN
        (SELECT language_id
           FROM language
-	 WHERE name = "English");
+         WHERE name = "English");
    
 -- 7b
 -- Use subqueries to display all actors who appear in the film Alone Trip.
@@ -190,10 +190,10 @@ SELECT first_name, last_name
   FROM actor
  WHERE actor_id IN
        (SELECT actor_id
-	  FROM film_actor
-	 WHERE film_id = (SELECT film_id
-			    FROM film
-			   WHERE title = "Alone Trip"));
+          FROM film_actor
+         WHERE film_id = (SELECT film_id
+                            FROM film
+                           WHERE title = "Alone Trip"));
                      
 -- 7c
 -- You want to run an email marketing campaign in Canada, for which you will need the 
@@ -208,7 +208,7 @@ SELECT first_name, last_name, email
                (SELECT city_id
                   FROM city
                  WHERE country_id = (SELECT country_id
-				       FROM country
+                                       FROM country
                                       WHERE country = "Canada")));
                           
 -- 7d
@@ -222,8 +222,8 @@ SELECT *
        (SELECT film_id
           FROM film_category
          WHERE category_id = (SELECT category_id 
-			        FROM category
-			       WHERE name = "Family"));
+                                FROM category
+                               WHERE name = "Family"));
                         
 -- 7e
 -- Display the most frequently rented movies in descending order.
