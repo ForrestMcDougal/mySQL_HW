@@ -118,7 +118,7 @@ SHOW CREATE TABLE address;
 
 SELECT staff.first_name, staff.last_name, address.address
   FROM staff
-       INNER JOIN address
+       JOIN address
        USING(address_id);
 
 -- 6b
@@ -127,11 +127,11 @@ SELECT staff.first_name, staff.last_name, address.address
 
 SELECT staff.staff_id, SUM(august_payment.amount)
   FROM staff
-       INNER JOIN (SELECT * 
-                     FROM payment 
-                    WHERE payment_date 
-                     LIKE "2005-08%") AS august_payment
-       ON staff.staff_id = august_payment.staff_id
+       JOIN (SELECT * 
+               FROM payment 
+              WHERE payment_date 
+               LIKE "2005-08%") AS august_payment
+       USING(staff_id)
  GROUP BY staff.staff_id;
 
 -- 6c
@@ -140,7 +140,7 @@ SELECT staff.staff_id, SUM(august_payment.amount)
 
 SELECT film.title, COUNT(film_actor.actor_id)
   FROM film
-       INNER JOIN film_actor
+       JOIN film_actor
        USING(film_id)
  GROUP BY film_actor.film_id;
 
@@ -162,7 +162,7 @@ SELECT COUNT(film_id)
 
 SELECT customer.first_name, customer.last_name, SUM(payment.amount)
   FROM customer
-       INNER JOIN payment
+       JOIN payment
        USING(customer_id)
  GROUP BY customer.customer_id
  ORDER BY customer.last_name;
